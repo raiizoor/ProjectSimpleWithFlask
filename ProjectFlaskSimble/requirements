@@ -1,0 +1,2 @@
+flask
+flask_mysqldb==0.2.0
