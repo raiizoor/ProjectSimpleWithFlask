@@ -1,6 +1,6 @@
 import MySQLdb
 print('Conectando...')
-conn = MySQLdb.connect(user='root', passwd='admin', host='127.0.0.1', port=3306)
+conn = MySQLdb.connect(user='root', passwd='root', host='127.0.0.1', port=3306)
 
 # Descomente se quiser desfazer o banco...
 conn.cursor().execute("DROP DATABASE `jogoteca`;")
@@ -44,12 +44,6 @@ for user in cursor.fetchall():
 cursor.executemany(
       'INSERT INTO jogoteca.jogo (nome, categoria, console) VALUES (%s, %s, %s)',
       [
-            ('God of War 4', 'Ação', 'PS4'),
-            ('NBA 2k18', 'Esporte', 'Xbox One'),
-            ('Rayman Legends', 'Indie', 'PS4'),
-            ('Super Mario RPG', 'RPG', 'SNES'),
-            ('Super Mario Kart', 'Corrida', 'SNES'),
-            ('Fire Emblem Echoes', 'Estratégia', '3DS'),
       ])
 
 cursor.execute('select * from jogoteca.jogo')
