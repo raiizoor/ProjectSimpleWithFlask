@@ -14,13 +14,13 @@ usuario_dao = UsuarioDao(db)
 @app.route('/')
 def index():
     lista = jogo_dao.listar()
-    return render_template('lista.html', titulo='Jogos', jogos=lista) 
+    return render_template('ListGames.html', titulo='Jogos', jogos=lista) 
 
 @app.route('/novo')
 def novo():
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima = url_for('novo')))
-    return render_template('AdicionarNovoJogo.html', titulo = 'Adicionar Novo Jogo')
+    return render_template('AddNewGame.html', titulo = 'Adicionar Novo Jogo')
 
 @app.route('/criar', methods=['POST', ])
 def criar():
@@ -47,7 +47,7 @@ def editar(id):
     jogo = jogo_dao.busca_por_id(id)
     nome_imagem = recupera_imagem(id)
     capa_jogo = f'capa{id}.jpg'
-    return render_template('editar.html', titulo = 'Editar o Jogo.', jogo = jogo,
+    return render_template('EditListGames.html', titulo = 'Editar o Jogo.', jogo = jogo,
                             capa_jogo = nome_imagem)
 
 @app.route('/atualizar', methods=['POST',])
