@@ -8,7 +8,6 @@ SQL_BUSCA_JOGOS = 'SELECT id, nome, categoria, console from jogo'
 SQL_CRIA_JOGO = 'INSERT into jogo (nome, categoria, console) values (%s, %s, %s)'
 SQL_CRIA_USUARIO = ''
 
-
 class JogoDao:
     def __init__(self, db):
         self.__db = db
@@ -47,13 +46,11 @@ class UsuarioDao:
 
     def buscar_por_id(self, usuario):
         cursor = self.__db.connection.cursor()
-        cursor.execute(SQL_USUARIO_POR_ID, (usuario,))
+        cursor.execute(SQL_USUARIO_POR_ID, (usuario))
         dados = cursor.fetchone()
         usuario = traduz_usuario(dados) if dados else None
         return usuario
- 
-
-
+   
 def traduz_jogos(jogos):
     def cria_jogo_com_tupla(tupla):
         return Jogo(tupla[1], tupla[2], tupla[3], id=tupla[0])
