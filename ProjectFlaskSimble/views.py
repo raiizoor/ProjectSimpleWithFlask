@@ -16,6 +16,11 @@ def index():
     lista = jogo_dao.listar()
     return render_template('ListGames.html', titulo='Jogos', jogos=lista) 
 
+@app.route('/listuser')
+def listuser():
+    lista = usuario_dao.listar()
+    return render_template('ListUsers.html', titulo='Adicionar Novo Usuario', usuarios=lista) 
+
 @app.route('/novo')
 def novo():
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
@@ -46,7 +51,6 @@ def editar(id):
         return redirect(url_for('login', proxima = url_for('editar', id=id)))
     jogo = jogo_dao.busca_por_id(id)
     nome_imagem = recupera_imagem(id)
-    capa_jogo = f'capa{id}.jpg'
     return render_template('EditListGames.html', titulo = 'Editar o Jogo.', jogo = jogo,
                             capa_jogo = nome_imagem)
 
@@ -72,6 +76,13 @@ def deletar(id):
     flash('O jogo foi deletado com sucesso.')
     return redirect(url_for('index'))
 
+@app.route('/deleteuser/<int:id>')
+def deleteuser(id):
+    deleta_arquivo(id)
+    usuario_dao.deletar(id)
+    flash('O Usuario foi deletado com sucesso.')
+    return redirect(url_for('listuser'))
+
 @app.route('/login')
 def login():
     proxima = request.args.get('proxima')
@@ -79,10 +90,10 @@ def login():
 
 @app.route('/autenticar', methods=['POST', ])
 def autenticar():
-    usuario = usuario_dao.buscar_por_id(request.form['usuario'])
+    usuario = usuario_dao.buscar_por_usuario(request.form['usuario'])
     if usuario:
         if usuario.senha == request.form['senha']:
-            session ['usuario_logado'] = usuario.usuario
+            session ['usuario_logado'] = usuario.id
             flash(usuario.nome + ' Logado com sucesso!')
             proxima_pagina =  request.form['proxima']
             return redirect(proxima_pagina)
