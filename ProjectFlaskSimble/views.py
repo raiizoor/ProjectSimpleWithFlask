@@ -41,6 +41,20 @@ def criar():
     arquivo.save(f'{upload_path}/capa{jogo.id}-{timestamp}.jpg')
     return redirect(url_for('index'))
 
+@app.route('/createuser', methods=['POST', ])
+def createuser():
+    nome = request.form['nome']
+    usuario = request.form['usuario']
+    senha = request.form['senha']
+    usuarios = Usuario(nome, usuario, senha)
+    usuario = usuario_dao.salvar(usuarios)
+
+    arquivo = request.files['arquivo']
+    upload_path = app.config['UPLOAD_PATH']
+    timestamp = time.time()
+    arquivo.save(f'{upload_path}/capa{usuario.id}-{timestamp}.jpg')
+    return redirect(url_for('listuser'))
+
 @app.route('/uploads/<nome_arquivo>')
 def imagem(nome_arquivo):
     return send_from_directory('uploads', nome_arquivo)
@@ -53,6 +67,15 @@ def editar(id):
     nome_imagem = recupera_imagem(id)
     return render_template('EditListGames.html', titulo = 'Editar o Jogo.', jogo = jogo,
                             capa_jogo = nome_imagem)
+
+@app.route('/edituser/<int:id>')
+def edituser(id):
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima = url_for('editar', id=id)))
+    usuario = usuario_dao.buscar_por_id(id)
+    nome_imagem = recupera_imagem(id)
+    return render_template('EditListUser.html', titulo = 'Editar o Usuario.', usuario = usuario,
+                            foto_usuario = nome_imagem)
 
 @app.route('/atualizar', methods=['POST',])
 def atualizar():
@@ -68,6 +91,21 @@ def atualizar():
     deleta_arquivo(jogo.id)
     arquivo.save( f'{upload_path}/capa{jogo.id}-{timestamp}.jpg')
     return redirect(url_for('index'))
+
+@app.route('/atualizaruser', methods=['POST',])
+def atualizaruser():
+    nome = request.form['nome']
+    usuario = request.form['usuario']
+    senha = request.form['senha']
+    usuario = Usuario(nome, usuario, senha, id=request.form['id'])
+    usuario_dao.salvar(usuario)
+
+    arquivo = request.files['arquivo']
+    upload_path = app.config['UPLOAD_PATH']
+    timestamp = time.time()
+    deleta_arquivo(usuario.id)
+    arquivo.save( f'{upload_path}/capa{usuario.id}-{timestamp}.jpg')
+    return redirect(url_for('listuser'))
 
 @app.route('/deletar/<int:id>')
 def deletar(id):

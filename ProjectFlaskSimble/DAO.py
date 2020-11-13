@@ -1,8 +1,9 @@
 from models import Jogo, Usuario
 
 SQL_DELETA_JOGO = 'delete from jogo where id = %s'
-SQL_DELETA_USUARIO = 'delete from jogo where id = %s'
+SQL_DELETA_USUARIO = 'delete from usuario where id = %s'
 SQL_JOGO_POR_ID = 'SELECT id, nome, categoria, console from jogo where id = %s'
+SQL_USUARIO_POR_ID = 'SELECT id, nome, usuario, senha from usuario where id = %s'
 SQL_USUARIO_POR_USUARIO = 'SELECT id, nome, usuario, senha from usuario where usuario = %s'
 SQL_ATUALIZA_JOGO = 'UPDATE jogo SET nome=%s, categoria=%s, console=%s where id = %s'
 SQL_ATUALIZA_USUARIO = 'UPDATE usuario SET nome=%s, usuario=%s, senha=%s where id = %s'
@@ -67,6 +68,12 @@ class UsuarioDao:
     def buscar_por_usuario(self, usuario):
         cursor = self.__db.connection.cursor()
         cursor.execute(SQL_USUARIO_POR_USUARIO, (usuario,))
+        tupla = cursor.fetchone()
+        return Usuario(tupla[1], tupla[2], tupla[3], id=tupla[0])
+
+    def buscar_por_id(self, id):
+        cursor = self.__db.connection.cursor()
+        cursor.execute(SQL_USUARIO_POR_ID, (id,))
         tupla = cursor.fetchone()
         return Usuario(tupla[1], tupla[2], tupla[3], id=tupla[0])   
 
