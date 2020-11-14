@@ -13,11 +13,15 @@ usuario_dao = UsuarioDao(db)
 
 @app.route('/')
 def index():
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima = url_for('index')))
     lista = jogo_dao.listar()
     return render_template('ListGames.html', titulo='Jogos', jogos=lista) 
 
 @app.route('/listuser')
 def listuser():
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima = url_for('listuser')))
     lista = usuario_dao.listar()
     return render_template('ListUsers.html', titulo='Adicionar Novo Usuario', usuarios=lista) 
 
@@ -26,6 +30,12 @@ def novo():
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima = url_for('novo')))
     return render_template('AddNewGame.html', titulo = 'Adicionar Novo Jogo')
+
+@app.route('/signup')
+def signup():
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima = url_for('signup')))
+    return render_template('AddNewUser.html', titulo = 'Adicionar Novo Usuario')
 
 @app.route('/criar', methods=['POST', ])
 def criar():
@@ -138,10 +148,6 @@ def autenticar():
         else: 
             flash('Usuario ou senha errados, porfavor tente novamente.')
             return redirect(url_for('login'))
-
-@app.route('/signup')
-def signup():
-    return render_template('AddNewUser.html')
 
 @app.route('/logout')
 def logout():

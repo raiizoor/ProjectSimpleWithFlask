@@ -6,7 +6,6 @@
                 <tr>
                     <th>Nome</th>
                     <th>Usuario</th>
-                    <th>Senha</th>
                     <th></th>
                 </tr>
             </thead>
@@ -15,7 +14,6 @@
                 <tr>
                     <td>{{ usuario.nome}}</td>
                     <td>{{ usuario.usuario }}</td>
-                    <td>{{ usuario.senha }}</td>
                     <td>
                         <a href="{{ url_for('edituser', id=usuario.id) }}">Editar</a>
                         <a href="{{ url_for('deleteuser', id=usuario.id) }}">Deletar</a>
