@@ -6,8 +6,45 @@
     <title>Jogoteca</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
   </head>
   <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+
+        <div class="navbar-brand">
+          <a class="navbar-item" href="{{ url_for('index') }}" >
+            <strong> Planilha de Jogos </strong>
+          </a>
+        </div>
+        
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{{url_for('index')}}">
+                    Jogos
+                </a>
+
+                <a class="navbar-item" href="{{url_for('listuser')}}">
+                    Usuários
+                </a>
+
+            </div>
+        </div>
+
+        <figure class="thumb col-md-1">
+            <img class="img-responsive" src="{{ url_for('imagem', nome_arquivo=rrr) }}">
+        </figure>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+               <a class="button is-light" href="{{url_for('logout')}}">
+                <strong>Logout</strong>
+               </a>
+            </div>
+          </div>
+        </div>
+        
+    </nav>
     <div class="container">
 
             {% with messages = get_flashed_messages() %}

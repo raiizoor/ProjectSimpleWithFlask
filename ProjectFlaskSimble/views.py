@@ -16,7 +16,8 @@ def index():
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima = url_for('index')))
     lista = jogo_dao.listar()
-    return render_template('ListGames.html', titulo='Jogos', jogos=lista) 
+    render_imagem = recupera_imagem(id)
+    return render_template('ListGames.html', titulo='Jogos', jogos=lista, rrr=render_imagem) 
 
 @app.route('/listuser')
 def listuser():
