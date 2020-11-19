@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+{% block conteudo %}
+        <a class="btn btn-primary" href="{{ url_for('signup') }}">Novo Usuario</a><!--Adicionar Novo Usuario na Lista-->
+        <table class="table table-striped table-responsive table-bordered">
+            <thead class="thead-default">
+                <tr>
+                    <th>Nome</th>
+                    <th>Usuario</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.nome}}</td>
+                    <td>{{ usuario.usuario }}</td>
+                    <td>
+                        <a href="{{ url_for('edituser', id=usuario.id) }}">Editar</a>
+                        <a href="{{ url_for('deleteuser', id=usuario.id) }}">Deletar</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

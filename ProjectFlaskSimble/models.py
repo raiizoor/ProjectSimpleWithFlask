@@ -1,9 +1,10 @@
 
 
 class Usuario:
-    def __init__(self, id, nome, senha):
+    def __init__(self, nome, usuario, senha, id=None):
         self.id = id
         self.nome = nome
+        self.usuario = usuario
         self.senha = senha
 
 class Jogo:

@@ -17,9 +17,10 @@ criar_tabelas = '''SET NAMES latin1;
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
     CREATE TABLE `usuario` (
-      `id` varchar(8) COLLATE utf8_bin NOT NULL,
-      `nome` varchar(20) COLLATE utf8_bin NOT NULL,
-      `senha` varchar(8) COLLATE utf8_bin NOT NULL,
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `nome` varchar(50) COLLATE utf8_bin NOT NULL,
+      `usuario` varchar(20) COLLATE utf8_bin NOT NULL,
+      `senha` varchar(15) COLLATE utf8_bin NOT NULL,
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;'''
 
@@ -28,11 +29,11 @@ conn.cursor().execute(criar_tabelas)
 # inserindo usuarios
 cursor = conn.cursor()
 cursor.executemany(
-      'INSERT INTO jogoteca.usuario (id, nome, senha) VALUES (%s, %s, %s)',
+      'INSERT INTO jogoteca.usuario (nome, usuario, senha) VALUES (%s, %s, %s)',
       [
-            ('luan', 'Luan Marques', 'flask'),
-            ('nico', 'Nico', '7a1'),
-            ('danilo', 'Danilo', 'vegas')
+            ('Luan Marques', 'luan', 'flask'),
+            ('Nico', 'nico', '7a1'),
+            ('Danilo', 'danilo', 'vegas')
       ])
 
 cursor.execute('select * from jogoteca.usuario')
