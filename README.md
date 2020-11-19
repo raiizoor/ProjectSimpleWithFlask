@@ -1,6 +1,6 @@
 
 
-<h1>**Web Developer Creating CRUD** :construction_worker:</h1>
+<h1>Web Developer Creating CRUD :construction_worker:</h1>
 
 Simple project where created CRUD using **Python** with framework **Flask**.
 
@@ -9,7 +9,7 @@ _**Tools used**_ :hammer_and_wrench:
 Python, Flask, JavaScript and Jquery, JS and JQ were used for render images.
 
 
-<h1> **How Running Project your System** :rocket:</h1> 
+<h1> How Running Project your System :rocket:</h1> 
 
 First shall create environment python using command _**python -m venv .venv**_
 
@@ -25,7 +25,7 @@ Run jogoteca.py - finish!!! :rocket: Now your system is runing
 
 Screen the Login, list from Games and list from Users.
 
-<h1>**Aplication**</h1>
+<h1>Aplication :computer:</h1>
 
 Login:  :woman_technologist:
 ![!image](ImagesAndGif-forProject/ScreenLogin.png)
@@ -38,6 +38,14 @@ List Users: :bookmark_tabs: :mage:
 
 How add game in games list: :bookmark_tabs: :man_technologist:
 ![](ImagesAndGif-forProject/AddGameInList.gif)
+
+<h2> Next Steps :gear:</h2>
+
+Add picture from user in Header, when is logged.
+
+Fix the login screen bug.
+
+Add in table user one field for user admin, and user standard.
 
 
 
