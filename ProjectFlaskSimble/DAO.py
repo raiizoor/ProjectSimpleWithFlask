@@ -5,6 +5,7 @@ SQL_DELETA_USUARIO = 'delete from usuario where id = %s'
 SQL_JOGO_POR_ID = 'SELECT id, nome, categoria, console from jogo where id = %s'
 SQL_USUARIO_POR_ID = 'SELECT id, nome, usuario, senha from usuario where id = %s'
 SQL_USUARIO_POR_USUARIO = 'SELECT id, nome, usuario, senha from usuario where usuario = %s'
+SQL_USUARIO_POR_SENHA = 'SELECT id, nome, usuario, senha from usuario where senha = %s'
 SQL_ATUALIZA_JOGO = 'UPDATE jogo SET nome=%s, categoria=%s, console=%s where id = %s'
 SQL_ATUALIZA_USUARIO = 'UPDATE usuario SET nome=%s, usuario=%s, senha=%s where id = %s'
 SQL_BUSCA_JOGOS = 'SELECT id, nome, categoria, console from jogo'
@@ -71,12 +72,18 @@ class UsuarioDao:
         tupla = cursor.fetchone()
         return Usuario(tupla[1], tupla[2], tupla[3], id=tupla[0])
 
+    def buscar_por_senha(self, senha):
+        cursor = self.__db.connection.cursor()
+        cursor.execute(SQL_USUARIO_POR_SENHA, (senha,))
+        tupla = cursor.fetchone()
+        return Usuario(tupla[1], tupla[2], tupla[3], id=tupla[0])
+
     def buscar_por_id(self, id):
         cursor = self.__db.connection.cursor()
         cursor.execute(SQL_USUARIO_POR_ID, (id,))
         tupla = cursor.fetchone()
-        return Usuario(tupla[1], tupla[2], tupla[3], id=tupla[0])   
-
+        return Usuario(tupla[1], tupla[2], tupla[3], id=tupla[0])
+        
     def deletar(self, id):
         self.__db.connection.cursor().execute(SQL_DELETA_USUARIO, (id, ))
         self.__db.connection.commit()
@@ -92,3 +99,4 @@ def traduz_usuario(usuarios):
     def cria_usuario_com_tupla(tupla):
         return Usuario(tupla[1], tupla[2], tupla[3], id=tupla[0])
     return list(map(cria_usuario_com_tupla, usuarios))
+
