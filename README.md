@@ -12,6 +12,7 @@ _**Tools used**_ :hammer_and_wrench:
 * JavaScript 
 * Jquery
 * Bootstrap
+* Bulma
 
 
 <h1> How Running Project your System :rocket:</h1> 
