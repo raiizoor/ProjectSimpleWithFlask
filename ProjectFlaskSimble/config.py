@@ -1,5 +1,6 @@
 import os
 
+DEBUG = True
 SECRET_KEY = 'alura'
 MYSQL_HOST = "localhost"
 MYSQL_USER = "root"
