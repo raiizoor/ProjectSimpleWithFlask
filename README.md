@@ -23,12 +23,16 @@ _**Tools used**_ :hammer_and_wrench:
 
 ![!image](ImagesAndGif-forProject/PythonExtension.png) 
 
-3. Next you shall to give command in your enmviroment make install, to install packages from flask needed to run the application :construction_worker:
+3. Next you shall to give command in your enmviroment - **make install**, to install packages from flask needed to run the application :construction_worker:
 
 4. Run prepara_banco.py - will create db
 
 5. Run jogoteca.py - finish!!! :rocket: Now your system is runing
 
+6. You can loggin using **luan** for login and **flask** for senha.
+
+7. List with user you find in archive **prepara_banco**
+   
 Screen the Login, list from Games and list from Users.
 
 <h1>Aplication :computer:</h1>
