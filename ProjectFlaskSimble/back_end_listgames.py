@@ -2,12 +2,13 @@ from flask import render_template, request, redirect, session, flash, url_for
 import time
 
 from models import Jogo
-from DAO import JogoDao
+from DAO import JogoDao, UsuarioDao
 
 from helpers import recupera_imagem, deleta_arquivo, imagem
 from jogoteca import app, db
 
 jogo_dao = JogoDao(db)
+usuario_dao = UsuarioDao(db)
 
 from back_end_users import *
 
@@ -83,9 +84,12 @@ def autenticar():
             flash(usuario.nome + ' Logado com sucesso!')
             proxima_pagina =  request.form['proxima']
             return redirect(proxima_pagina)
-        else: 
+        elif usuario.senha != request.form['senha']:
             flash('Usuario ou senha errados, porfavor tente novamente.')
-            return redirect(url_for('login'))
+            return redirect(url_for('login'))           
+    else: 
+        flash('Usuario ou senha errados, porfavor tente novamente.')
+        return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():

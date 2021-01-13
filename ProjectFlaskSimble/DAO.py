@@ -70,13 +70,8 @@ class UsuarioDao:
         cursor = self.__db.connection.cursor()
         cursor.execute(SQL_USUARIO_POR_USUARIO, (usuario,))
         tupla = cursor.fetchone()
-        return Usuario(tupla[1], tupla[2], tupla[3], id=tupla[0])
-
-    def buscar_por_senha(self, senha):
-        cursor = self.__db.connection.cursor()
-        cursor.execute(SQL_USUARIO_POR_SENHA, (senha,))
-        tupla = cursor.fetchone()
-        return Usuario(tupla[1], tupla[2], tupla[3], id=tupla[0])
+        usuario = busca_usuarios_registrados(tupla) if tupla else None
+        return usuario
 
     def buscar_por_id(self, id):
         cursor = self.__db.connection.cursor()
@@ -99,4 +94,7 @@ def traduz_usuario(usuarios):
     def cria_usuario_com_tupla(tupla):
         return Usuario(tupla[1], tupla[2], tupla[3], id=tupla[0])
     return list(map(cria_usuario_com_tupla, usuarios))
+
+def busca_usuarios_registrados(tupla):
+    return Usuario(tupla[1], tupla[2], tupla[3], tupla[0])
 
