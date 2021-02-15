@@ -17,13 +17,28 @@ _**Tools used**_ :hammer_and_wrench:
 
 <h1> How Running Project your System :rocket:</h1> 
 
-1. First shall create environment python using command _**python -m venv .venv**_
+1. First shall create environment python using command.
+```powershell
+    python -m venv .venv
+```
 
-2. You need install Mysql Server and Mysqlclient for [Python Extension Packages for Windows](https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient) <- Link for download.
+2. Install [Mysql Server](https://dev.mysql.com/downloads/installer/). Active your environment virtual and install [Mysqlclient](https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient) using pip.
 
 ![!image](ImagesAndGif-forProject/PythonExtension.png) 
 
-3. Next you shall to give command in your enmviroment - **make install**, to install packages from flask needed to run the application :construction_worker:
+```powershell
+    (.venv) pip install .\mysqlclient-1.4.6-cp39-cp39-win_amd64.whl
+```
+
+3. Next you shall to give command in your enmviroment. To install packages from flask. Needed to run the application :construction_worker:
+```powershell
+    make install
+```
+-  Had sure you have install **make** in environment S.O, if you don't have excute this commmand
+```powershell
+    pip install -r requirements.txt
+```
+
 
 4. Run prepara_banco.py - will create db
 
